@@ -3,6 +3,8 @@
 # 📝 Blogging REST API
 ### Production-Grade RESTful API with FastAPI, SQLAlchemy, JWT Authentication & Automated Tests
 
+[![Live API](https://img.shields.io/badge/Live%20API-blogging--api--deployment.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://blogging-api-deployment.vercel.app)
+[![Swagger Docs](https://img.shields.io/badge/Swagger%20Docs-Live%20Interactive-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://blogging-api-deployment.vercel.app/docs)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froraks24%2Fblogging-api)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -14,11 +16,21 @@
 
 <br />
 
-**A robust, clean, and scalable backend engine engineered with modern asynchronous Python standards. Ready for one-click deployment on Vercel Serverless.**
+**A robust, clean, and scalable backend engine engineered with modern asynchronous Python standards. Deployed live on Vercel Serverless.**
 
-[🚀 Deploy to Vercel](#-deploying-to-vercel) · [📑 API Reference](#-api-endpoints) · [🏗️ Data Architecture](#-database-architecture) · [⚡ Quick Start](#-quick-start)
+[🌐 Live API](https://blogging-api-deployment.vercel.app) · [📑 Interactive Swagger Docs](https://blogging-api-deployment.vercel.app/docs) · [📖 ReDoc](https://blogging-api-deployment.vercel.app/redoc) · [🚀 Deploy Your Own](#-deploying-to-vercel) · [⚡ Quick Start](#-quick-start)
 
 </div>
+
+---
+
+## 🌐 Production Deployment & Live API
+
+The API is live and globally served via **Vercel Serverless Functions**:
+
+* 🔗 **Live Base URL**: [**https://blogging-api-deployment.vercel.app**](https://blogging-api-deployment.vercel.app)
+* 📑 **Interactive Swagger UI**: [**https://blogging-api-deployment.vercel.app/docs**](https://blogging-api-deployment.vercel.app/docs)
+* 📖 **ReDoc Documentation**: [**https://blogging-api-deployment.vercel.app/redoc**](https://blogging-api-deployment.vercel.app/redoc)
 
 ---
 
@@ -65,7 +77,7 @@ erDiagram
 
 The API is fully adapted for **Vercel Serverless Functions** through Python ASGI routing.
 
-### 1-Click Deployment (Recommended)
+### 1-Click Deployment (Clone & Host Your Own)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froraks24%2Fblogging-api)
 
