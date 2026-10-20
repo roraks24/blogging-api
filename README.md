@@ -1,147 +1,228 @@
-# Blogging API
+<div align="center">
 
-A production-ready REST API built with FastAPI — featuring JWT authentication, PostgreSQL database, file uploads, and automated tests. Deployed live on Render.
+# 📝 Blogging REST API
+### Production-Grade RESTful API with FastAPI, SQLAlchemy, JWT Authentication & Automated Tests
 
-**Live API:** [blogging-api-a0u0.onrender.com/docs](https://blogging-api-a0u0.onrender.com/docs)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froraks24%2Fblogging-api)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Pydantic](https://img.shields.io/badge/Pydantic-v2.0-E92063?style=for-the-badge&logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
+[![SQLAlchemy](https://img.shields.io/badge/ORM-SQLAlchemy%202.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org/)
+[![JWT](https://img.shields.io/badge/Auth-JWT%20%2B%20Bcrypt-black?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
+[![Pytest](https://img.shields.io/badge/Tests-7%2F7%20Passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)](https://pytest.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
----
+<br />
 
-## Features
+**A robust, clean, and scalable backend engine engineered with modern asynchronous Python standards. Ready for one-click deployment on Vercel Serverless.**
 
-- **CRUD** — create, read, update, delete blog posts
-- **Authentication** — JWT tokens with bcrypt password hashing
-- **Database** — SQLAlchemy ORM with SQLite (dev) and PostgreSQL (production)
-- **File Uploads** — profile picture upload with static file serving
-- **Background Tasks** — async task execution after response is sent
-- **Middleware** — request logging and CORS support
-- **Testing** — pytest test suite with a separate test database
-- **Deployment** — Dockerized and deployed on Render
+[🚀 Deploy to Vercel](#-deploying-to-vercel) · [📑 API Reference](#-api-endpoints) · [🏗️ Data Architecture](#-database-architecture) · [⚡ Quick Start](#-quick-start)
 
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | FastAPI |
-| Database ORM | SQLAlchemy |
-| Validation | Pydantic v2 |
-| Auth | JWT (python-jose) + passlib (bcrypt) |
-| Testing | pytest + httpx |
-| Server | Uvicorn |
-| Deployment | Render |
+</div>
 
 ---
 
-## Project Structure
+## 🌟 Overview & Key Features
 
+The **Blogging REST API** is designed as a modular, secure, and production-ready foundation for content management platforms and blogging engines:
+
+- 🔐 **Stateless Authentication**: JSON Web Tokens (JWT) signed with HMAC-SHA256, salted password hashing via `bcrypt`, and OAuth2 password bearer schemes.
+- 🗄️ **Dual Database Support**: Seamless development using local SQLite and zero-downtime transition to production PostgreSQL (e.g. Supabase, Neon, AWS RDS).
+- 📰 **Complete CRUD Operations**: Full lifecycle management of blog posts with author attribution, pagination, and ownership verification.
+- 🖼️ **Media & Profile Uploads**: Multi-part form handling for user avatar and asset uploads with static file delivery.
+- ⚡ **Background Tasks**: Asynchronous event execution (e.g., automated welcome notifications) running out-of-band after HTTP response delivery.
+- 📊 **Middleware Logging & CORS**: Configured cross-origin resource sharing and millisecond-precision request logging.
+- 🧪 **Automated Test Coverage**: Comprehensive test suite utilizing `pytest` and FastAPI's `TestClient` over isolated in-memory databases.
+- ☁️ **Vercel Serverless Architecture**: Fully configured with ASGI entrypoints and `vercel.json` routing for instant serverless execution.
+
+---
+
+## 🏗️ Database Architecture
+
+```mermaid
+erDiagram
+    USERS ||--o{ POSTS : authors
+    USERS {
+        int id PK
+        string username UK
+        string email UK
+        string password
+        string profile_pic
+    }
+    POSTS {
+        int id PK
+        string title
+        string content
+        string author
+        string date_posted
+        int owner_id FK
+    }
 ```
-blogging-api/
-├── app/
-│   ├── main.py           # app setup, middleware, routers
-│   ├── database.py       # engine, session, Base
-│   ├── models.py         # SQLAlchemy models (Post, User)
-│   ├── schemas.py        # Pydantic schemas
-│   ├── auth.py           # JWT token creation and verification
-│   ├── hashing.py        # bcrypt password hashing
-│   ├── dependencies.py   # reusable DI functions
-│   └── routers/
-│       ├── posts.py      # post routes
-│       └── users.py      # auth + user routes
-├── tests/
-│   └── test_posts.py     # automated tests
-├── uploads/              # saved profile pictures
-├── Dockerfile
-├── requirements.txt
-└── .env                  # not committed
-```
 
 ---
 
-## API Endpoints
+## 🚀 Deploying to Vercel
 
-### Posts
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| GET | `/posts` | No | Get all posts |
-| GET | `/posts/{id}` | No | Get post by ID |
-| POST | `/posts` | Yes | Create a post |
-| PUT | `/posts/{id}` | Yes | Update a post |
-| DELETE | `/posts/{id}` | Yes | Delete a post |
+The API is fully adapted for **Vercel Serverless Functions** through Python ASGI routing.
 
-### Users
-| Method | Endpoint | Auth | Description |
-|---|---|---|---|
-| POST | `/register` | No | Register a new user |
-| POST | `/login` | No | Login and get JWT token |
-| POST | `/users/{id}/upload` | Yes | Upload profile picture |
+### 1-Click Deployment (Recommended)
 
----
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froraks24%2Fblogging-api)
 
-## Running Locally
+1. Click the **Deploy with Vercel** button above.
+2. Link your GitHub account and import the repository.
+3. Configure the following **Environment Variables**:
+   - `SECRET_KEY`: A cryptographically secure random string (e.g., `openssl rand -hex 32`).
+   - `DATABASE_URL` *(Optional)*: Your cloud PostgreSQL connection URI (e.g., Supabase or Neon). If left unset, the API defaults to an ephemeral `/tmp/blog.db` SQLite database.
+4. Click **Deploy**. Vercel will build and serve the application globally.
 
-**1. Clone the repo**
+### Deploying via Vercel CLI
 ```bash
+# Install and link Vercel CLI
+npm install -g vercel
+
+# Deploy to production
+vercel --prod
+```
+
+---
+
+## ⚡ Quick Start (Local Development)
+
+### 1. Prerequisites
+- Python 3.10+
+- Git
+
+### 2. Installation
+```bash
+# Clone the repository
 git clone https://github.com/roraks24/blogging-api.git
 cd blogging-api
-```
 
-**2. Create virtual environment**
-```bash
+# Create & activate a virtual environment
 python -m venv .venv
 .venv\Scripts\activate      # Windows
-source .venv/bin/activate   # Mac/Linux
-```
+# source .venv/bin/activate # macOS / Linux
 
-**3. Install dependencies**
-```bash
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-**4. Create `.env` file**
-```
-SECRET_KEY=your-secret-key-here
-```
-
-**5. Run the server**
+### 3. Environment Configuration
+Create a `.env` file from the provided example template:
 ```bash
-fastapi dev app/main.py
+cp .env.example .env
+```
+Inside `.env`, define your configuration:
+```env
+SECRET_KEY=your_super_secret_jwt_key
+DATABASE_URL=sqlite:///./blog.db
 ```
 
-API is now running at `http://localhost:8000`  
-Interactive docs at `http://localhost:8000/docs`
+### 4. Run the API Server
+```bash
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+- **API Base URL**: `http://127.0.0.1:8000`
+- **Interactive Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- **Alternative ReDoc UI**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
 ---
 
-## Running Tests
+## 📡 API Endpoints
 
-```bash
-pytest tests/ -v
-```
+### Authentication & Users
+| Method | Endpoint | Auth Required | Description | Request Body |
+|---|---|:---:|---|---|
+| `POST` | `/register` | No | Register a new user account | `{"username", "email", "password"}` |
+| `POST` | `/login` | No | Authenticate user & receive bearer JWT | `OAuth2 Password Form (username, password)` |
+| `POST` | `/users/{id}/upload` | Yes | Upload user profile picture | `multipart/form-data (file)` |
 
-Tests use a separate `test.db` and never touch the real database.
+### Blog Posts
+| Method | Endpoint | Auth Required | Description |
+|---|---|:---:|---|
+| `GET` | `/posts` | No | Retrieve list of all published posts |
+| `GET` | `/posts/{id}` | No | Fetch detailed post by identifier |
+| `POST` | `/posts` | Yes | Create a new blog post |
+| `PUT` | `/posts/{id}` | Yes | Update an existing blog post |
+| `DELETE` | `/posts/{id}` | Yes | Remove a blog post |
+
+### Health & Metadata
+| Method | Endpoint | Auth Required | Description |
+|---|---|:---:|---|
+| `GET` | `/` | No | Service status check and documentation links |
 
 ---
 
-## Running with Docker
+## 🧪 Running Automated Tests
+
+The test suite validates status codes, model schemas, registration flows, and route security over an isolated in-memory database:
 
 ```bash
+pytest -v
+```
+
+Expected output:
+```text
+tests/test_posts.py::test_get_posts PASSED
+tests/test_posts.py::test_get_post PASSED
+tests/test_posts.py::test_create_post PASSED
+tests/test_posts.py::test_update_post PASSED
+tests/test_posts.py::test_delete_post PASSED
+tests/test_posts.py::test_register_user PASSED
+tests/test_posts.py::test_login PASSED
+
+============================== 7 passed in 1.03s ==============================
+```
+
+---
+
+## 🐳 Docker Deployment
+
+To run the application within an isolated container:
+
+```bash
+# Build the Docker image
 docker build -t blogging-api .
-docker run -p 8000:8000 blogging-api
+
+# Run the container
+docker run -p 8000:8000 -e SECRET_KEY="production-secret" blogging-api
 ```
 
 ---
 
-## Environment Variables
+## 📂 Repository Structure
 
-| Variable | Description |
-|---|---|
-| `SECRET_KEY` | JWT signing secret |
-| `DATABASE_URL` | Database connection string (defaults to SQLite) |
+```
+blogging-api/
+├── api/
+│   └── index.py            # Vercel Serverless Python entrypoint
+├── app/
+│   ├── routers/
+│   │   ├── posts.py        # Blog posts CRUD router
+│   │   └── users.py        # Authentication & user profile router
+│   ├── auth.py             # JWT issuance and token validation
+│   ├── database.py         # SQLAlchemy engine & session dependency
+│   ├── dependencies.py     # Reusable request dependency guards
+│   ├── hashing.py          # Secure bcrypt password encryption
+│   ├── main.py             # FastAPI factory, middleware & routing
+│   ├── models.py           # SQLAlchemy declarative database models
+│   └── schemas.py          # Pydantic v2 validation schemas
+├── tests/
+│   ├── __init__.py
+│   ├── conftest.py
+│   └── test_posts.py       # Pytest integration test suite
+├── uploads/                # File uploads storage directory (.gitkeep)
+├── .env.example            # Environment template configuration
+├── .gitignore              # Git ignore rules for Python & binaries
+├── Dockerfile              # Container configuration
+├── requirements.txt        # Production Python dependencies
+├── vercel.json             # Vercel serverless build & rewrite rules
+└── README.md               # API documentation
+```
 
 ---
 
-## Author
+## 👤 Author
 
-**Rohit Saini** — built in 7 days as a FastAPI learning project.  
-GitHub: [@roraks24](https://github.com/roraks24)
+Developed by **[roraks24](https://github.com/roraks24)**.
